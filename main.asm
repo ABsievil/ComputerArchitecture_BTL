@@ -59,8 +59,10 @@ syscall
         # Lặp qua từng bit của thanh ghi B
         li $t0, 0               # Biến đếm bit
     loop:
-        beqz $a1, end_loop      # Nếu bit của B là 0 thì bỏ qua
-        add $s0, $s0, $a0       # Cộng A vào kết quả nếu bit của B là 1
+    	srl $a2,$a1,1
+    	sll $a2,$a2,1
+        beq $a1,$a2, end_loop      # Nếu bit cuối của B là 0 thì bỏ qua
+        add $s0, $s0, $a0       # Cộng A vào kết quả nếu bit cuối của B là 1
 
     end_loop:
         sll $a0, $a0, 1         # Dịch trái thanh ghi A
@@ -69,4 +71,3 @@ syscall
         blt $t0, 32, loop       # Lặp lại cho đến khi đã xử lý tất cả các bit
 
         jr $ra                  # Trả về từ hàm multiply
-
