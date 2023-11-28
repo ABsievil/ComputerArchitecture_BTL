@@ -28,9 +28,7 @@
         move $a0, $t0           # Load giá trị của thanh ghi A vào $a0
         move $a1, $t1           # Load giá trị của thanh ghi B vào $a1
         jal multiply
-li $v0, 1               # Sử dụng syscall để in số DEC 64-bit
-move $a0, $s0           # Load thanh ghi kết quả vào $a0
-syscall
+
         # In kết quả
         li $v0, 4               # Sử dụng syscall để in chuỗi
         la $a0, result_hex      # Load địa chỉ của chuỗi HEX
