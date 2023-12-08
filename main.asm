@@ -247,9 +247,12 @@ add_128_bit_unsigned: # add 128 bit a0-a3 with 128 bit t0-t3 and save in a0-a3
 		beq $t7,$zero,add_2_no_remainder # Khi cả 2 bit đầu của a2,t2 đều là 0 thì không có khả năng có nhớ
 	add_2_with_remainder: # Cộng t2,a2 có khả năng có nhớ
 		addu $a2,$a2,$t2
-		addu $a2,$a2,$t8
 		sltu $t7,$a2,$t2
+		addu $a2,$a2,$t8
 		add $t8,$zero,$zero
+		bne $a2,$zero,zero_case_2 #TH sau khi cộng a2 thành 0 -> có nhớ
+		addi $t7,$zero,1
+		zero_case_2:
 		# Nếu $t7 = 1 tức là $a2 sau khi cộng $t2 thì nhỏ hơn $t2 => Cộng có nhớ
 		beq $t7,$zero,add_1
 		addi $t8,$zero,1 # Có nhớ
@@ -269,7 +272,10 @@ add_128_bit_unsigned: # add 128 bit a0-a3 with 128 bit t0-t3 and save in a0-a3
 		addu $a1,$a1,$t8
 		sltu $t7,$a1,$t1
 		add $t8,$zero,$zero
+		bne $a1,$zero,zero_case_1 #TH sau khi cộng a1 thành 0 -> có nhớ
+		addi $t7,$zero,1
 		# Nếu $t7 = 1 tức là $a1 sau khi cộng $t1 thì nhỏ hơn $t1 => Cộng có nhớ
+		zero_case_1:
 		beq $t7,$zero,add_0
 		addi $t8,$zero,1 # Có nhớ
 		j add_0
