@@ -249,6 +249,7 @@ add_128_bit_unsigned: # add 128 bit a0-a3 with 128 bit t0-t3 and save in a0-a3
 		addu $a2,$a2,$t2
 		addu $a2,$a2,$t8
 		sltu $t7,$a2,$t2
+		add $t8,$zero,$zero
 		# Nếu $t7 = 1 tức là $a2 sau khi cộng $t2 thì nhỏ hơn $t2 => Cộng có nhớ
 		beq $t7,$zero,add_1
 		addi $t8,$zero,1 # Có nhớ
@@ -267,6 +268,7 @@ add_128_bit_unsigned: # add 128 bit a0-a3 with 128 bit t0-t3 and save in a0-a3
 		addu $a1,$a1,$t1
 		addu $a1,$a1,$t8
 		sltu $t7,$a1,$t1
+		add $t8,$zero,$zero
 		# Nếu $t7 = 1 tức là $a1 sau khi cộng $t1 thì nhỏ hơn $t1 => Cộng có nhớ
 		beq $t7,$zero,add_0
 		addi $t8,$zero,1 # Có nhớ
